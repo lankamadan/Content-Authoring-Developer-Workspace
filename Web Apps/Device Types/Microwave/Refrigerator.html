@@ -1,0 +1,16 @@
+function createRecipe() {
+		var selectedDevices = [];
+		for(var i=0; i<frmDeviceList.device.length; i++) {
+			if(frm.device[i].checked) { //Get the devices selected by the user. This will be used to post the recipe to those devices.
+				selectedDevices.push(frm.device[i].value);
+			}
+	  	 }
+	  	 $.xhr(
+url : "{https://ocfgateway.samsungiotcloud.com/v1/devices/909d984d-8b08-4d17-ac88-8d97853ab4e5/actions}", 
+method : “POST”,
+headers : {‘X-IoT-Token’ : $.cookie(“X-IoT-Token”),
+data : {devices : selectedDevices},
+success :  function() {
+			//Recipe created for the selected devices.
+	  	 })
+	}
